@@ -1,3 +1,92 @@
-h1 {
-  font-style: italic;
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+  --primary: #b8c1ec;
+  --primary-dark: #9da5cb;
+  --secondary: #232946;
+  --tertiary: #ffbdc7;
+  --tertiary-dark: #e6adb6;
+}
+
+.scrollmark {
+  font-size: 1rem;
+  font-family: 'Varela Round';
+  margin: 1rem;
+  color: var(--secondary);
+}
+
+*:focus {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+.scrollmark__title {
+  font-size: 1rem;
+}
+
+.scrollmark__positions {
+  margin-bottom: 1rem;
+  padding: 0;
+  font-size: 0.75rem;
+  list-style: none;
+}
+
+.scrollmark__position {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3125rem;
+}
+
+.scrollmark__btn {
+  height: 1.75rem;
+  border: none;
+  border-radius: 0.3125rem;
+  padding: 0.3125rem 0.5rem;
+}
+.scrollmark__btn:hover {
+  cursor: pointer;
+}
+
+.scrollmark__btn--position {
+  text-align: left;
+  font-family: 0.75rem;
+}
+.scrollmark__btn--position:hover {
+  background-color: #ddd;
+}
+
+.scrollmark__btn--delete {
+  width: 1.75rem;
+  padding: 0.3125rem;
+  color: var(--secondary);
+  background-color: var(--tertiary);
+}
+.scrollmark__btn--delete:hover {
+  background-color: var(--tertiary-dark);
+}
+
+.scrollmark__btn--save {
+  margin-top: 0.3125rem;
+  background-color: var(--primary);
+  font-weight: 600;
+}
+.scrollmark__btn--save:hover {
+  background-color: var(--primary-dark);
+}
+
+.scrollmark__icon {
+  width: 100%;
+  height: 100%;
+}
+
+.scrollmark__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollmark__input {
+  padding: 0.3125rem;
+  border: 1px solid #eee;
+  border-radius: 00.3125rem;
 }
