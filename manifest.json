@@ -6,19 +6,13 @@
   "icons": {
     "64": "icons/icon.png"
   },
-  "background": {
-    "scripts": [
-      "browserActions/script.js"
-    ]
-  },
   "permissions": [
     "activeTab",
     "storage"
   ],
   "content_scripts": [
     {
-      "matches":[ "*://*/*"],
-      "js": ["browserActions/script.js"]
+      "matches":[ "*://*/*"]
     }
   ],
   "browser_action": {
