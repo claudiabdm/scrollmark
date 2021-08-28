@@ -6,11 +6,16 @@
   "icons": {
     "64": "icons/icon.png"
   },
-  "background": {
-    "scripts": [
-      "background_script.js"
-    ]
-  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches":[ "*://*/*"],
+      "js": ["browserActions/script.js"]
+    }
+  ],
   "browser_action": {
     "default_icon": {
       "64": "icons/icon.png"

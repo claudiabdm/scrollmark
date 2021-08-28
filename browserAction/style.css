@@ -35,6 +35,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #fafafa;
+  padding: 0.3125rem;
+  border-radius: 0.3125rem;
   margin-bottom: 0.3125rem;
 }
 
@@ -87,7 +90,8 @@
 }
 
 .scrollmark__input {
-  padding: 0.3125rem;
-  border: 1px solid #eee;
-  border-radius: 00.3125rem;
+  padding: 0.3125rem 0.5rem;
+  border: none;
+  background-color: #fafafa;
+  border-radius: 0.3125rem;
 }
