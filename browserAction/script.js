@@ -127,6 +127,8 @@ async function addNewPosition({ position, markName, url }) {
 	const savedPositions = await browser.storage.local.get(`${url}`);
 	if (!savedPositions.hasOwnProperty(url)) {
 		browser.storage.local.set({ [url]: [{ position, markName }] });
+		const newLi = createLi({ position, markName });
+		positionsListElem.appendChild(newLi);
 	} else {
 		const updatedPositions = [...savedPositions[url]];
 		const positionSavedIdx = updatedPositions.findIndex((obj) => obj.position == position);
