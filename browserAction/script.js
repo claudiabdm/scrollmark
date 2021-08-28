@@ -1,6 +1,5 @@
 const positionsListElem = document.querySelector('.scrollmark__positions');
-
-positionsListElem.addEventListener('click', handleListClicks);
+const savePositionForm = document.getElementById('savePositionForm');
 
 browser.runtime.onMessage.addListener((message) => {
 	if (message.command == 'position') {
@@ -8,25 +7,13 @@ browser.runtime.onMessage.addListener((message) => {
 	}
 });
 
-browser.tabs.executeScript({ file: '/content_script.js' }).then(listenToSaves);
+browser.tabs.executeScript({ file: '/content_script.js' }).then(listenToClicks);
 
 loadSavedPositionsList();
 
-function handleListClicks(e) {
-	const position = e.target.id;
-	if (position) {
-		if (e.target.id.includes('delete')) {
-			deletePosition(e.target.parentNode);
-		}
-		if (e.target.id.includes('go-to')) {
-			goToPosition(position);
-		}
-	}
-}
-
-function listenToSaves() {
-	const savePositionForm = document.getElementById('savePositionForm');
+function listenToClicks() {
 	savePositionForm.addEventListener('submit', handleSave);
+	positionsListElem.addEventListener('click', handleListClicks);
 
 	async function handleSave(e) {
 		e.preventDefault();
@@ -39,6 +26,36 @@ function listenToSaves() {
 			markName,
 		});
 		e.target.reset();
+	}
+
+	async function handleListClicks(e) {
+		const position = e.target.id;
+
+		if (position) {
+			if (e.target.id.includes('delete')) {
+				deletePosition(e.target.parentNode);
+			}
+			if (e.target.id.includes('go-to')) {
+				await goToPosition(e.target.parentNode.id);
+			}
+		}
+
+		async function deletePosition(li) {
+			const { savedPositionsList, activeTab } = await getSavedPositionsActiveTabFromStorage();
+			const updatedPositions = savedPositionsList.filter(
+				(obj) => Number(obj.position) !== Number(li.id)
+			);
+			browser.storage.local.set({ [activeTab.url]: updatedPositions });
+			positionsListElem.removeChild(li);
+		}
+
+		async function goToPosition(position) {
+			const activeTab = (await browser.tabs.query({ active: true, currentWindow: true }))[0];
+			browser.tabs.sendMessage(activeTab.id, {
+				command: 'scrollToPosition',
+				position,
+			});
+		}
 	}
 }
 
@@ -82,7 +99,7 @@ function createGoToButton(position, markName) {
 	const goToButton = document.createElement('button');
 	goToButton.classList.add('scrollmark__btn', 'scrollmark__btn--position');
 	goToButton.type = 'button';
-	goToButton.textContent = `Go to ${markName}`;
+	goToButton.textContent = markName;
 	goToButton.id = `go-to-${position}`;
 	return goToButton;
 }
@@ -104,15 +121,6 @@ function createDeleteButton(position) {
 	deleteSvg.appendChild(useSvg);
 	deleteButton.appendChild(deleteSvg);
 	return deleteButton;
-}
-
-async function deletePosition(li) {
-	const { savedPositionsList, activeTab } = await getSavedPositionsActiveTabFromStorage();
-	const updatedPositions = savedPositionsList.filter(
-		(obj) => Number(obj.position) !== Number(li.id)
-	);
-	browser.storage.local.set({ [activeTab.url]: updatedPositions });
-	positionsListElem.removeChild(li);
 }
 
 async function addNewPosition({ position, markName, url }) {

@@ -6,6 +6,11 @@
   "icons": {
     "64": "icons/icon.png"
   },
+  "background": {
+    "scripts": [
+      "browserActions/script.js"
+    ]
+  },
   "permissions": [
     "activeTab",
     "storage"

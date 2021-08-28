@@ -8,26 +8,20 @@
 	<body class="scrollmark">
 		<h1 class="scrollmark__title">Scrollmark</h1>
 		<ul class="scrollmark__positions">
-			<!-- <li class="scrollmark__position" data-sroll-position="679">
-				<button type="button" class="scrollmark__btn scrollmark__btn--position">Last scroll position</button>
-				<button type="button" class="scrollmark__btn scrollmark__btn--delete" aria-label="Delete saved position">
-					<svg class="scrollmark__icon" aria-hidden="true">
-            <use href="sprite.svg#delete" />
-          </svg>
-				</button>
-			</li>
-			<li class="scrollmark__position" data-sroll-position="500">
-				<button type="button" class="scrollmark__btn scrollmark__btn--position">Scroll 500 position</button>
-        <button type="button" class="scrollmark__btn scrollmark__btn--delete" aria-label="Delete saved position">
-					<svg class="scrollmark__icon" aria-hidden="true">
-            <use href="sprite.svg#delete" />
-          </svg>
-				</button>
-			</li> -->
+			<!-- Saved positions -->
 		</ul>
-    <form id="savePositionForm" class="scrollmark__form">
-      <input class="scrollmark__input" type="text" name="markName" id="markName" aria-label="Name of mark" placeholder="Write name of mark...">
-      <button type="submit" id="savePositionButton" class="scrollmark__btn scrollmark__btn--save">Save position</button> 
-    </form>
+		<form id="savePositionForm" class="scrollmark__form">
+			<input
+				class="scrollmark__input"
+				type="text"
+				name="markName"
+				id="markName"
+				aria-label="Name of mark"
+				placeholder="Write name of mark..."
+			/>
+			<button type="submit" id="savePositionButton" class="scrollmark__btn scrollmark__btn--save">
+				Save position
+			</button>
+		</form>
 	</body>
 </html>
