@@ -1,4 +1,4 @@
-<img src="https://github.com/claudiabdm/scrollmark/blob/main/icons/icon.png" width="64" height="64" alt="Scrollmark" align="left">
+<img src="https://github.com/claudiabdm/scrollmark/blob/main/icons/icon.svg" width="64" height="64" alt="Scrollmark" align="left">
 
 # Scrollmark
 https://user-images.githubusercontent.com/44007726/131229045-4e28f00a-cd1c-4fed-930b-3e9fb877c3f2.mov
