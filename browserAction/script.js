@@ -22,7 +22,7 @@ function listenToClicks() {
 		const activeTab = (await browser.tabs.query({ active: true, currentWindow: true }))[0];
 		browser.tabs.sendMessage(activeTab.id, {
 			command: 'savePosition',
-			url: activeTab.url,
+			url: getMainPathUrl(activeTab.url),
 			markName,
 		});
 		e.target.reset();
@@ -66,7 +66,8 @@ async function loadSavedPositionsList() {
 
 async function getSavedPositionsActiveTabFromStorage() {
 	const activeTab = (await browser.tabs.query({ active: true, currentWindow: true }))[0];
-	const savedPositions = await browser.storage.local.get(`${activeTab.url}`);
+	activeTab.url = getMainPathUrl(activeTab.url);
+	const savedPositions = await browser.storage.local.get(activeTab.url);
 	const savedPositionsList = !savedPositions.hasOwnProperty(activeTab.url)
 		? []
 		: savedPositions[activeTab.url];
@@ -124,7 +125,7 @@ function createDeleteButton(position) {
 }
 
 async function addNewPosition({ position, markName, url }) {
-	const savedPositions = await browser.storage.local.get(`${url}`);
+	const savedPositions = await browser.storage.local.get(url);
 	if (!savedPositions.hasOwnProperty(url)) {
 		browser.storage.local.set({ [url]: [{ position, markName }] });
 		const newLi = createLi({ position, markName });
@@ -143,4 +144,9 @@ async function addNewPosition({ position, markName, url }) {
 		}
 		browser.storage.local.set({ [url]: updatedPositions });
 	}
+}
+
+function getMainPathUrl(url) {
+	const indexAnchor = url.indexOf('#');
+	return indexAnchor > -1 ? url.slice(0, indexAnchor) : url;
 }
