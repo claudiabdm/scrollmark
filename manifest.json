@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "scrollmark",
   "description": "Save your last scroll position",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icons": {
     "24": "icons/icon.svg",
     "48": "icons/icon.svg",
